@@ -1,0 +1,30 @@
+@use "../abstracts" as *;
+
+aside {
+  grid-area: aside;
+  background-color: var(--neutral-accent-color);
+  align-self: start;
+  display: none;
+  padding: .5em;
+  border-radius: .5em;
+
+  > nav {
+    display: grid;
+    grid-auto-flow: row;
+    position: sticky;
+    grid-template-columns: 1fr;
+    gap: .5em;
+
+    > a {
+      text-decoration: none;
+      background-image: $gradient;
+      color: white;
+      padding: .5em;
+      border-radius: .5em;
+    }
+  }
+
+  @media (min-width: $screen-medium) {
+    display: initial;
+  }
+}

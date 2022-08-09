@@ -1,0 +1,8 @@
+- Should constants be `UPPER_SNAKE`?
+- Do we have a `func` keyword / other syntax?
+- Formatted string
+    - `f"`?
+- External packages!!!!
+- Module namespace conflicts (`as` required in conflicts?)
+- Can we initialise a `char` array with `"`, or do we need a seperate string type?
+- For the `FS::read_file`, do we just return a byte array that can be decoded using the `Encoding` library or do we give the developer the option to pass an encoding method.
