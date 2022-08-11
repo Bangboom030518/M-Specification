@@ -58,22 +58,6 @@ pub enum PathEntry {
     Dir(Dir)
 }
 
-impl PathEntry {
-    pub fn get_name(&self) -> String {
-        match self {
-            PathEntry::File(file) => file.name.clone(),
-            PathEntry::Dir(dir) => dir.name.clone()
-        }
-    }
-
-    pub fn get_path(&self) -> String {
-        match self {
-            PathEntry::File(file) => file.path.clone(),
-            PathEntry::Dir(dir) => dir.path.clone()
-        }
-    }
-}
-
 pub fn tree(path: &str) -> Vec<PathEntry> {
     let paths = fs::read_dir(path).unwrap();
     let mut result: Vec<PathEntry> = Vec::new();
@@ -98,14 +82,4 @@ pub fn tree(path: &str) -> Vec<PathEntry> {
         );
     };
     result
-}
-
-pub fn display_tree(tree: Vec<PathEntry>, indent: u8) -> () {
-    for path in tree {
-        println!("{}{}", "\t".repeat(indent.into()) , path.get_name());
-        match path {
-            PathEntry::Dir(dir) => display_tree(dir.children, indent + 1),
-            _ => ()
-        }
-    };
 }
