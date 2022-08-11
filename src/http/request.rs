@@ -55,7 +55,11 @@ pub fn parse(mut stream: &TcpStream) -> Request {
         _ => Method::Unknown,
     };
 
-    let route = QUERY_PATTERN.replace_all(request_line[1], "").to_string();
+    let route = if request_line.len() == 3 {
+        QUERY_PATTERN.replace_all(request_line[1], "").to_string()
+    } else {
+        "/".to_string()
+    };
 
     // let mut body = String::new();
 

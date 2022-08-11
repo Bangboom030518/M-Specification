@@ -10,8 +10,11 @@ mod build;
 mod http;
 mod utils;
 
+const PORT: u16 = 80;
+
 lazy_static! {
     static ref TRAILING_SLASH_PATTERN: Regex = Regex::new(r"/?$").unwrap();
+    static ref ADDRESS: String = format!("127.0.0.1:{}", PORT);
 }
 
 // https://stackoverflow.com/questions/19650265/is-there-a-faster-shorter-way-to-initialize-variables-in-a-rust-struct
@@ -22,7 +25,9 @@ lazy_static! {
 fn main() {
     build();
 
-    let listener = TcpListener::bind("0.0.0.0:80").unwrap();
+    let listener = TcpListener::bind(&*ADDRESS).unwrap();
+
+    println!("Server running on http://{}", *ADDRESS);
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
@@ -56,3 +61,4 @@ fn handle_connection(mut stream: TcpStream) {
     stream.write(&response).unwrap();
     stream.flush().unwrap();
 }
+

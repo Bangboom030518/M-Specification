@@ -42,11 +42,36 @@ pub fn read_dir(path: &str) -> Vec<String> {
     result
 }
 
-pub struct PathEntry {
-    pub is_dir: bool,
+pub struct Dir {
     pub children: Vec<PathEntry>,
     pub path: String,
     pub name: String
+}
+
+pub struct File {
+    pub path: String,
+    pub name: String
+}
+
+pub enum PathEntry {
+    File(File), 
+    Dir(Dir)
+}
+
+impl PathEntry {
+    pub fn get_name(&self) -> String {
+        match self {
+            PathEntry::File(file) => file.name.clone(),
+            PathEntry::Dir(dir) => dir.name.clone()
+        }
+    }
+
+    pub fn get_path(&self) -> String {
+        match self {
+            PathEntry::File(file) => file.path.clone(),
+            PathEntry::Dir(dir) => dir.path.clone()
+        }
+    }
 }
 
 pub fn tree(path: &str) -> Vec<PathEntry> {
@@ -56,17 +81,19 @@ pub fn tree(path: &str) -> Vec<PathEntry> {
         let path = path.unwrap().path();
         let is_dir = path.is_dir();
         let name = path.file_stem().unwrap().to_str().unwrap().to_string();
-        let path = path.to_str().unwrap();
+        let path = path.to_str().unwrap().to_string();
         result.push(
-            PathEntry {
-                path: path.to_string(),
-                name,
-                is_dir,
-                children: if is_dir {
-                    tree(path)
-                } else {
-                    Vec::new()
-                },
+            if is_dir {
+                PathEntry::Dir(Dir {
+                    children: tree(&path),
+                    name,
+                    path
+                })
+            } else {
+                PathEntry::File(File {
+                    name,
+                    path
+                })
             }
         );
     };
@@ -75,7 +102,10 @@ pub fn tree(path: &str) -> Vec<PathEntry> {
 
 pub fn display_tree(tree: Vec<PathEntry>, indent: u8) -> () {
     for path in tree {
-        println!("{}{}", "\t".repeat(indent.into()) , path.name);
-        display_tree(path.children, indent + 1);
+        println!("{}{}", "\t".repeat(indent.into()) , path.get_name());
+        match path {
+            PathEntry::Dir(dir) => display_tree(dir.children, indent + 1),
+            _ => ()
+        }
     };
 }

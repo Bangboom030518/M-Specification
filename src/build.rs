@@ -1,8 +1,9 @@
-use crate::utils::{capitalise, parse_key_value_pairs, read_dir, tree, display_tree};
+use crate::utils::{capitalise, parse_key_value_pairs, read_dir, tree, PathEntry};
 use grass;
 use lazy_static::lazy_static;
 use pulldown_cmark::{html, Options, Parser};
 use regex::Regex;
+use std::collections::HashMap;
 use std::fs;
 use std::fs::DirBuilder;
 use std::path::Path;
@@ -15,21 +16,10 @@ lazy_static! {
 
 pub fn build() -> () {
     let template = fs::read_to_string("template.html").unwrap();
-    let options = grass::Options::default();
     let paths = read_dir("./docs");
-    let styles = match grass::from_path(
-        "styles/style.scss",
-        &options.style(grass::OutputStyle::Compressed),
-    ) {
-        Ok(value) => value,
-        Err(err) => {
-            panic!("Sass: {}", err);
-        }
-    };
-    let nav_tree = tree("./docs");
-    display_tree(nav_tree, 0);
-    
-    
+    let styles = build_styles();
+    let nav_tree = build_html_tree(tree("./docs"));
+
     for path in paths {
         let text = fs::read_to_string(&path).unwrap();
         let dest = MARKDOWN_EXT_PATTERN
@@ -41,31 +31,8 @@ pub fn build() -> () {
             .create(Path::new(&dest).parent().unwrap())
             .unwrap();
 
-        let metadata_string = match MARKDOWN_METADATA_PATTERN.find(&text) {
-            None => "".to_string(),
-            matched => matched.unwrap().as_str().replace("---", "").to_string(),
-        };
-        let metadata = parse_key_value_pairs(&metadata_string);
-
-        let dest_string = String::from(&dest);
-
-        let dest_path = Path::new(&dest_string);
-
-        let filename = capitalise(match dest_path.file_stem().unwrap().to_str().unwrap() {
-            "index" => match dest_path
-                .parent()
-                .unwrap()
-                .file_name()
-                .unwrap()
-                .to_str()
-                .unwrap()
-            {
-                "dist" => "M Specification",
-                path => path,
-            },
-            path => path,
-        });
-
+        let metadata = parse_metadata(&text);
+        let filename = get_filename(&dest);
         let markdown = parse_md(&MARKDOWN_METADATA_PATTERN.replace(&text, ""));
         let write_result = fs::write(
             dest,
@@ -75,13 +42,41 @@ pub fn build() -> () {
                     metadata.get("heading").unwrap_or(&filename.to_string()),
                 )
                 .replace("%content%", &markdown)
-                .replace("%styles%", &styles),
+                .replace("%styles%", &format!("<style>{}</style>", styles))
+                .replace("%nav.tree%", &nav_tree),
         );
+
         match write_result {
             Ok(_) => (),
             Err(error) => println!("{}", error),
         };
     }
+}
+
+fn get_filename(dest: &str) -> String {
+    let path = Path::new(dest);
+    capitalise(match path.file_stem().unwrap().to_str().unwrap() {
+        "index" => match path
+            .parent()
+            .unwrap()
+            .file_name()
+            .unwrap()
+            .to_str()
+            .unwrap()
+        {
+            "dist" => "M Specification",
+            path => path,
+        },
+        path => path,
+    })
+}
+
+fn parse_metadata(text: &str) -> HashMap<String, String> {
+    let metadata_string = match MARKDOWN_METADATA_PATTERN.find(&text) {
+        None => "".to_string(),
+        matched => matched.unwrap().as_str().replace("---", "").to_string(),
+    };
+    parse_key_value_pairs(&metadata_string)
 }
 
 fn parse_md(text: &str) -> String {
@@ -93,4 +88,37 @@ fn parse_md(text: &str) -> String {
     let mut html_output = String::new();
     html::push_html(&mut html_output, parser);
     html_output
+}
+
+fn build_styles() -> String {
+    let options = grass::Options::default();
+    match grass::from_path(
+        "styles/style.scss",
+        &options.style(grass::OutputStyle::Compressed),
+    ) {
+        Ok(value) => value,
+        Err(err) => {
+            panic!("Sass: {}", err);
+        }
+    }
+}
+
+fn build_html_tree(tree: Vec<PathEntry>) -> String {
+    let mut result = String::new();
+    for path in tree {
+        result += &match path {
+            PathEntry::Dir(dir) => {
+                format!(
+                    "<li><details><summary><a href=\"{}\">{}</a></summary><ul>{}</ul></details></li>",
+                    &dir.path,
+                    &dir.name,
+                    &build_html_tree(dir.children)
+                )
+            }
+            PathEntry::File(file) => {
+                format!("<li><a href=\"{}\">{}</a></li>", file.path, file.name)
+            }
+        }
+    }
+    result
 }
