@@ -37,7 +37,6 @@ pub fn parse(mut stream: &TcpStream) -> Request {
 
     stream.read(&mut buffer).unwrap();
 
-    // let mut headers: HashMap<String, String> = HashMap::new();
     let raw_request = String::from_utf8_lossy(&buffer[..]);
     let mut lines: Vec<&str> = raw_request.split("\r\n").collect();
 
