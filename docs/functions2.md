@@ -15,16 +15,15 @@ int8 add(num1: int8, num2: int8) -> num1 + num2;
 
 > **Note**: Unlike some languages, where the type of parameters can be inferred, type annotations are required on functional parameters.
 
-### Type Parameters
+### Parameters
 
 Parmameters are declared with their name, followed by a colon and type to serve as their type annotation
 
 | Name | Colon | Type | 
 | --- | --- | --- |
-| `a` | `: ` | `char[]` |
+| `a` | `: ` | `char[]` | 
 
-
-
+### Type Parameters
 
 ```m
 R[] map<T, R>(map_fn: ((val: T, [index: usize]) -> R), iter: T[]);
@@ -51,16 +50,13 @@ struct T {
     prop1: int16,
     prop2: char[],
 
-    trait {
-        fn new {
-            
-        }
+    Self new(&self, self.int16, self.char[]) -> {
+        
     }
 
     trait Map {
-        fn
+        fn map()
     }
-
 }
 ```
 
