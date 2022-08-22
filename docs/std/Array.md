@@ -4,9 +4,6 @@
 
 The library containing all the basic utility functions for arrays.
 
-// Cewl
-// Ok, 1 sec
-
 ## Reverse
 
 ```

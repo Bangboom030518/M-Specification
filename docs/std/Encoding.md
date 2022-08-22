@@ -4,8 +4,6 @@ The library used to encode and decode strings, allowing the support of encoding 
 
 ## Method
 
-> TODO: finish with all possible encoding methods [here](https://en.wikipedia.org/wiki/Character_encoding#Common_character_encodings).
-
 ```
 export type Method enum {
     UTF_8,
@@ -83,7 +81,7 @@ All the supported encoding methods.
 ## Encode
 
 ```
-export const encode: (string: char[], method: Method) -> uint8[];
+export pure uint8[] encode(string: char[], method: Method);
 ```
 
 Returns the text `string`, encoded as an array of bytes using the encoding method `method`.
@@ -91,7 +89,11 @@ Returns the text `string`, encoded as an array of bytes using the encoding metho
 ## Decode
 
 ```
-export const decode: (bytes: uint8[], method: Method) -> char[];
+export char[] decode(bytes: uint8[], method: Method);
 ```
 
 Returns the array of bytes `bytes`, decoded as a string using the encoding method `method`.
+
+```
+int add(a, b) a + b;
+```

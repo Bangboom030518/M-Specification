@@ -1,10 +1,14 @@
 The library used for interacting with the file system.
 
+> **TODO**: Write the following:
+> - Write File
+> - Append File
+> - Remove File
+> - Read Directory
+> - Get File Info
+>   - Do we use a path struct?
+
 ## Read To Bytes
-
-> TODO: do we provide encoding method?
-
-> TODO: method overloading doesn't exist. How do we represent this?
 
 ```
 export const read_to_bytes: (path: char[]) -> uint8[];
@@ -15,5 +19,4 @@ export const read_to_bytes: (path: char[]) -> uint8[];
 ```
 export const read_to_string: (path: char[], encoding: Encoding::Method) -> char[];
 ```
-
 
