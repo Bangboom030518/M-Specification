@@ -1,5 +1,13 @@
 @use "../abstracts" as *;
 
+@mixin button {
+  text-decoration: none;
+  background-image: $gradient;
+  color: white;
+  padding: .5em;
+  border-radius: .5em;
+}
+
 aside {
   grid-area: aside;
   background-color: var(--neutral-accent-color);
@@ -8,19 +16,21 @@ aside {
   padding: .5em;
   border-radius: .5em;
 
-  > nav {
+  ul {
     display: grid;
     grid-auto-flow: row;
     position: sticky;
     grid-template-columns: 1fr;
     gap: .5em;
 
-    > a {
-      text-decoration: none;
-      background-image: $gradient;
-      color: white;
-      padding: .5em;
-      border-radius: .5em;
+    li {
+      list-style: none;
+      display: block;
+      box-sizing: border-box;
+    }
+
+    a {
+      @include button;
     }
   }
 

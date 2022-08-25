@@ -43,10 +43,14 @@ void main() -> {
 4 miles ≈ 6.43738km
 ```
 
+### Let
+
 `let` is like rust `let`
+
+### Var
 
 `var` is like rust `let mut`
 
-`const` is like rust `const`
+### Static
 
 `static` is evaluated once and stored until it's no longer needed.
