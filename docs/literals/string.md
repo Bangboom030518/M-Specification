@@ -6,7 +6,7 @@ Strings are declared with double quotes and optional flags.
 
 | [Flags] | Open Quotes | Content | Close Quotes |
 | --- | --- | --- | --- |
-| `fmr` | `"` | `Hello World` | `"` |
+| `mr` | `"` | `Hello World` | `"` |
 
 > **Note**: flags should appear in alphabetical order. 
 
@@ -26,6 +26,20 @@ Console::write_line(my_string);
 ```console
 Hello World
 ```
+
+## String Templates
+
+*All* strings in M can be templates. The compiler determines whether or not this is neccessary. This means values can be formatted and interpolated at specific points within a string literal.
+
+#### Syntax
+
+Values are interpolated using the `$` sign followed by curly braces.
+
+| Dollar Sign | Open Curly Brace |  Expression | [debug] | Close Curly Brace |
+| --- | --- | --- | --- | --- |
+| `$` | `{` | `my_sussy_variable` | `:?` | `}` |
+
+> **NOTE**: For info on how to impliment formatters and debug formatters, read [The Format Namespace](/std/Format.md) in the standard library.
 
 ## Flags
 
@@ -51,33 +65,6 @@ Console::write_line(r"2: Hello \n World");
 World
 2: Hello \n World
 ```
-
-### 'Formatted'
-
-The `f` flag creates a 'formatted' string, where expressions can be interpolated into the string within curly braces.
-
-#### Example
-
-##### Code
-```m
-import Console from "std";
-
-const my_value = "World"
-
-Console::write_line("1: Hello {my_value}");
-Console::write_line(f"2: Hello {my_value}");
-```
-
-##### Expected Output
-```console
-1: Hello {my_value}
-2: Hello World
-```
-
-> TODO: Implement this:
-
-> **Note**: Numbers, booleans and other primitives can also be displayed in this way.
-
 ### 'Multiline'
 
 The `m` flag creates a 'multiline' string, where the string can span multiple lines.

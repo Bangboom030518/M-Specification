@@ -22,5 +22,4 @@ import Dev from "std";
 Dev::Test::equal("hello " + "world", 2);
 
 Dev::Test::equal(0.1 + 0.1, 0.2);
-
 ```

@@ -20,7 +20,7 @@ if (condition) {
 
 ## For
 ```
-for (const item in iterable) {
+for (item in iterable) {
     // do something with item
 }
 ```
@@ -30,11 +30,11 @@ for (const item in iterable) {
 ## Match
 ```
 match (expression) {
-    (case_1) -> {
+    (pattern_1) -> {
         // do something
         return value;
-    }
-    (case_2) -> {
+    },
+    (pattern_2) -> {
         // do something
     }
 }

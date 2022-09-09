@@ -16,7 +16,6 @@ Variables declared with the `const` keyword are constants, meaning their value c
 
 Constants are not stored in memory, but instead have their value interpolated wherever they are used. They are useful for describing constants such as magic numbers with no cost to performance.
 
-
 #### Example
 
 ##### Code
@@ -54,3 +53,4 @@ void main() -> {
 ### Static
 
 `static` is evaluated once and stored until it's no longer needed.
+

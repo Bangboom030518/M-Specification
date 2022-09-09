@@ -44,3 +44,68 @@ RegExp! {
 }
 
 ```
+
+```
+struct Dog {
+  name: String
+}
+
+impl CanSpeak for Dog {
+  const SOUND: &'static str = "woof";
+  fn get_name(self) -> String {
+    self.name
+  }
+}
+
+trait CanSpeak {
+  const SOUND: &'static str;
+  fn get_name(self) -> String;
+
+  fn speak(self) {
+    println!("{} says {}", self.get_name(), Self::SOUND)
+  }
+}
+
+trait CanShout {
+  fn shout(self);
+}
+
+impl <T: CanSpeak>CanShout for T {
+  fn shout(self) {
+     println!("{} shout {}", self.get_name(), Self::SOUND)
+  }
+}
+
+Dog {
+  name: "Lundy".to_string()
+}.speak()
+
+trait CanSpeak<Self> {
+  const SOUND: &'static str;
+  fn get_name(self) -> String;
+
+  fn speak(self) {
+    println!("{} says {}", self.get_name(), Self::SOUND)
+  }
+}
+
+trait CanShout<Self: CanSpeak> {
+  fn speak(self) {
+    println!("{} shouts {}", self.get_name(), Self::SOUND)
+  }
+}
+
+type Dog struct {
+  name: string;
+
+  trait CanSpeak {
+    const SOUND = "woof";
+
+    fn get_name(self) {
+      self.name
+    }
+  };
+
+  trait CanShout;
+}
+```

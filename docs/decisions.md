@@ -1,7 +1,6 @@
 - Should constants be `UPPER_SNAKE`?
 - Do we have a `func` keyword / other syntax?
-- Formatted string
-    - `f"`?
+- Do we have `${...}` or `{...}` to interpolate values into string templates.
 - External packages!!!!
 - Module namespace conflicts (`as` required in conflicts?)
 - Can we initialise a `char` array with `"`, or do we need a seperate string type?
