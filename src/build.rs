@@ -14,7 +14,7 @@ lazy_static! {
     static ref MARKDOWN_METADATA_PATTERN: Regex = Regex::new(r"^---\n[\s\S]*?\n---").unwrap();
 }
 
-pub fn build() -> () {
+pub fn build() {
     let template = fs::read_to_string("template.html").unwrap();
     let paths = read_dir("./docs");
     let styles = build_styles();
