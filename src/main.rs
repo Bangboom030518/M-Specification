@@ -1,3 +1,4 @@
+#![warn(clippy::nursery, clippy::pedantic)]
 use crate::build::build;
 use lazy_static::lazy_static;
 use regex::Regex;
@@ -53,12 +54,12 @@ fn handle_connection(mut stream: TcpStream) {
         },
         _ => http::response::Response {
             body: fs::read_to_string("404.html").unwrap(),
-            status_code: http::status::StatusCode::NotFound,
+            status_code: http::status::Code::NotFound,
             ..Default::default()
         },
     });
 
-    stream.write(&response).unwrap();
+    stream.write_all(&response).unwrap();
     stream.flush().unwrap();
 }
 

@@ -71,9 +71,9 @@ fn get_filename(dest: &str) -> String {
 }
 
 fn parse_metadata(text: &str) -> HashMap<String, String> {
-    let metadata_string = match MARKDOWN_METADATA_PATTERN.find(&text) {
+    let metadata_string = match MARKDOWN_METADATA_PATTERN.find(text) {
         None => "".to_string(),
-        matched => matched.unwrap().as_str().replace("---", "").to_string(),
+        matched => matched.unwrap().as_str().replace("---", ""),
     };
     parse_key_value_pairs(&metadata_string)
 }

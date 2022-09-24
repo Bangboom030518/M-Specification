@@ -1,4 +1,4 @@
-use crate::http::status::{get_status, StatusCode};
+use crate::http::status::{Code as StatusCode};
 use std::collections::HashMap;
 
 pub struct Response {
@@ -8,8 +8,8 @@ pub struct Response {
 }
 
 impl Default for Response {
-    fn default() -> Response {
-        Response {
+    fn default() -> Self {
+        Self {
             headers: HashMap::new(),
             body: String::new(),
             status_code: StatusCode::OK,
@@ -22,14 +22,15 @@ pub fn create(mut response: Response) -> Vec<u8> {
         "Content-Length".to_string(),
         (response.body.len() + 2).to_string(),
     );
-    let mut headers = String::new();
-    for (name, value) in response.headers.iter() {
-        headers += &format!("{}: {}\r\n", name, value);
-    }
+    let headers = response
+        .headers
+        .iter()
+        .map(|(name, value)| format!("{}: {}\r\n", name, value))
+        .collect::<String>();
 
     format!(
         "HTTP/1.1 {}\r\n{}\r\n\r\n{}",
-        get_status(response.status_code),
+        response.status_code.as_str(),
         headers,
         response.body
     )

@@ -45,17 +45,17 @@ pub fn read_dir(path: &str) -> Vec<String> {
 pub struct Dir {
     pub children: Vec<PathEntry>,
     pub path: String,
-    pub name: String
+    pub name: String,
 }
 
 pub struct File {
     pub path: String,
-    pub name: String
+    pub name: String,
 }
 
 pub enum PathEntry {
-    File(File), 
-    Dir(Dir)
+    File(File),
+    Dir(Dir),
 }
 
 pub fn tree(path: &str) -> Vec<PathEntry> {
@@ -66,20 +66,15 @@ pub fn tree(path: &str) -> Vec<PathEntry> {
         let is_dir = path.is_dir();
         let name = path.file_stem().unwrap().to_str().unwrap().to_string();
         let path = path.to_str().unwrap().to_string();
-        result.push(
-            if is_dir {
-                PathEntry::Dir(Dir {
-                    children: tree(&path),
-                    name,
-                    path
-                })
-            } else {
-                PathEntry::File(File {
-                    name,
-                    path
-                })
-            }
-        );
-    };
+        result.push(if is_dir {
+            PathEntry::Dir(Dir {
+                children: tree(&path),
+                name,
+                path,
+            })
+        } else {
+            PathEntry::File(File { path, name })
+        });
+    }
     result
 }
