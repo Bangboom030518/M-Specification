@@ -1,4 +1,4 @@
 - Do we have `${...}` or `{...}` to interpolate values into string templates.
 - External packages!!!!
 - Module namespace conflicts (`as` required in conflicts?)
-- 
+- Do we have `true`/`false` or a `Bool` enum.

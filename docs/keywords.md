@@ -10,3 +10,7 @@ The following are keywords in m, and thus cannot be used in variables.
 - `async`
 - `await`
 - `return`
+- `pure`
+- `if`
+- `else`
+- `while`
