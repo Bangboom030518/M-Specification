@@ -4,12 +4,12 @@
 
 Functions are declared with their parameters in brackets.
 
-| Return Type | [Name] | Type Params | Params                     | Arrow | Return Expression |
-| ----------- | ------ | ----------- | -------------------------- | ----- | ----------------- |
-| `int8`      | `add`  | `<...>`     | `(num1: int8, num2: int8)` | `->`  | `num1 + num2`     |
+| [Pure Keyword] | Function Keyword | [Name] | Type Params | Params                     | [Return Type] | Arrow | Return Expression |
+| -------------- | ---------------- | ------ | ----------- | -------------------------- | ------------- | ----- | ----------------- |
+| (`pure`)       | `fn`             | `add`  | (`<T>`)     | `(num1: Int8, num2: Int8)` | `: Int8`      | `->`  | `num1 + num2`     |
 
 ```m
-int8 add(num1: int8, num2: int8) -> num1 + num2;
+fn add(num1: Int8, num2: Int8): Int16 -> num1 + num2;
 ```
 
 > **Note**: Unlike some languages, where the type of parameters can be inferred, type annotations are required on functional parameters.

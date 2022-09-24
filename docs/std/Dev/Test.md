@@ -1,5 +1,5 @@
-> TODO: work out tests properly.
-
+> **TODO**: work out tests properly.
+> **TODO**: functional decorators instead?
 The library used to write unit tests.
 
 ## Equal
@@ -17,7 +17,7 @@ type Test struct {
     test_fn: (() -> void) -> Test<(() -> void)>
 }
 
-export const create_test: (test_fn: (() -> void)) -> Test
+export fn create_test(test_fn: (() -> void)) -> Test
 ```
 
 Wraps a test to be exported.
@@ -31,7 +31,7 @@ mlang test
 For example:
 
 ```
-export const my_unit_test = Test::create_test(() -> {
+export const my_unit_test = Test::create_test(|| {
     // 2 + 2 makes 5
     Test::equal(2 + 2, 5)
 })

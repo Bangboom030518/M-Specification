@@ -94,3 +94,7 @@ Console::write_line(m"
 2: Hello
 World
 ```
+
+## Type
+
+`String`

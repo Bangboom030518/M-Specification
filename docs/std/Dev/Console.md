@@ -1,13 +1,11 @@
-> TODO: is `IO` called `Console`?
+> **TODO**: figure out how to make IO events pure for this, we should not be inconsistent
 
-The library used for temporary logs during development. Unlike in the `IO` module, these can be used within pure functions but their use anywhere within the project will raise a warning during development and prevent building for production.
-
-> TODO: figure out how to make IO events pure for this, we should not be inconsistent
+The library used for temporary logs during development. Unlike in the `Stdout` module, these can be used within pure functions but their use anywhere within the project will raise a warning during development and prevent building for production.
 
 ## Log
 
-> TODO: better type
+Logs `item` to the console.
 
-```
-export const log: <T>(item: T) -> void; 
+```m
+export fn log<T: Debug>(item: T) -> Nil; 
 ```

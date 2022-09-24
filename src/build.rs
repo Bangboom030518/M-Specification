@@ -1,5 +1,4 @@
 use crate::utils::{capitalise, parse_key_value_pairs, read_dir, tree, PathEntry};
-use grass;
 use lazy_static::lazy_static;
 use pulldown_cmark::{html, Options, Parser};
 use regex::Regex;

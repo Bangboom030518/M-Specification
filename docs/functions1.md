@@ -2,18 +2,17 @@
 
 Functions are declared with their parameters in brackets
 
-| [Type Parameters] | Open Bracket | [Parameters] | Close Braket | Arrow | Return Type | Body |
-| --- | --- | --- | --- | --- | --- | --- |
-| `<T, R>` | `(` | `a: char[], b: uint16` | `)` | ` -> ` | `void` | `{ ... }` |    
-
+| [Type Parameters] | Open Bracket | [Parameters]           | Close Braket | Arrow | Return Type | Body      |
+| ----------------- | ------------ | ---------------------- | ------------ | ----- | ----------- | --------- |
+| `<T, R>`          | `(`          | `a: String, b: uint16` | `)`          | `->`  | `void`      | `{ ... }` |
 
 ### Parameters
 
-Parmameters within 
+Parmameters within
 
-| Name | Colon | Type | 
-| --- | --- | --- |
-| `a` | `: ` | `char[]` |
+| Name | Colon | Type     |
+| ---- | ----- | -------- |
+| `a`  | `: `  | `String` |
 
 > **Note**: Unlike some languages, where the type of parameters can be inferred, type annotations are required on functional parameters.
 
@@ -21,7 +20,7 @@ Parmameters within
 
 ## The Void Type
 
-Functions that return nothing can have a return type of `void`. They will then implicitly return after the body has finished executing, but can return early with an empty `return` statement. 
+Functions that return nothing can have a return type of `void`. They will then implicitly return after the body has finished executing, but can return early with an empty `return` statement.
 
 > TODO: can you have single expressions after ifs without curly braces.
 
@@ -43,4 +42,4 @@ const function = (arg_1: [type], arg_2: [type]) -> [return type] {
 }
 ```
 
-> **Note**: Pure keywords cannot have a return type of `void`. 
+> **Note**: Pure keywords cannot have a return type of `void`.

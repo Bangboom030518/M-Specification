@@ -109,3 +109,42 @@ type Dog struct {
   trait CanShout;
 }
 ```
+
+```m
+R[] map<T, R>(map_fn: ((val: T, [index: usize]) -> R), iter: T[]);
+
+character
+integer
+boolean
+
+map([1, 2], (a) -> a ** 2);
+```
+
+```m
+trait Map {
+   R[] map<T, R>(self, map_fn: ((val: T, [index: usize]) -> R))) {
+
+   };
+}
+
+impl Map for <T: Sized> {
+
+}
+
+struct T {
+    prop1: int16,
+    prop2: String,
+
+    Self new(&self, self.int16, self.String) -> {
+
+    }
+
+    trait Map {
+        fn map()
+    }
+}
+```
+
+```
+int16 x = 12;
+```

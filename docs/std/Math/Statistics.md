@@ -11,7 +11,7 @@ Returns the mean of the list `list`.
 ## Median
 
 ```
-export const median: pure <T extends Number::Generic, R extends Number::Generic>(list: T[]) -> R;
+export pure fn median<T extends Number::Generic, R extends Number::Generic>(list: List<T>) -> R;
 ```
 
 Returns the median of the list `list`.
@@ -19,7 +19,7 @@ Returns the median of the list `list`.
 ## Range
 
 ```
-export const range: pure <T extends Number::Generic>(list: T[]) -> T;
+export pure fn range<T extends Number::Generic>(list: List<T>) -> T;
 ```
 
 Returns the range of the list `list`.

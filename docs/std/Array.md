@@ -1,6 +1,6 @@
 > TODO: What about slices and tuples?
 
-> TODO: `UnsignedInt`???
+> TODO: `usize`???
 
 The library containing all the basic utility functions for arrays.
 

@@ -81,7 +81,7 @@ All the supported encoding methods.
 ## Encode
 
 ```
-export pure uint8[] encode(string: char[], method: Method);
+export pure uint8[] encode(string: String, method: Method);
 ```
 
 Returns the text `string`, encoded as an array of bytes using the encoding method `method`.
@@ -89,7 +89,7 @@ Returns the text `string`, encoded as an array of bytes using the encoding metho
 ## Decode
 
 ```
-export char[] decode(bytes: uint8[], method: Method);
+export String decode(bytes: uint8[], method: Method);
 ```
 
 Returns the array of bytes `bytes`, decoded as a string using the encoding method `method`.
