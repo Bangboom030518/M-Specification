@@ -1,31 +1,51 @@
+> **TODO**: streams?????
+
 Modules allow code to be shared and reused across files. M provides a simple, strict module interface to simplify working with modules.
 
 ## Exports
 
-Exports are 
-
-Packages can only directly export [namespaces](./namespace).
-
-`package.m`
-```
-export namespace Module1 {
-  ...
-}
-
-export namepace Module2 {
-  ...
-}
-
-export Module3 from "./sub/package1.m";
-
-export Module4, Module5 from "./sub/package2.m";
-```
 ## Imports
 
-Imports use the following syntax, which imports the `Namespace1` and the `Namespace2` namespaces from `./package.m`.
+### Syntax
 
+| import keyword | module name |
+| -------------- | ----------- |
+| `import`       | `module`    |
+
+### Examples
+
+```m
+import module;
 ```
-import Namespace1, Namespace2 from "./package.m";
+
+This imports the file `./module.m`, relative to the dependant
+
+## Example
+
+`./module.m`
+```m
+import std/io;
+
+static STDOUT = io::stdout();
+
+export function greet(hour: UInt8): Nil -> {
+  let greeting = if (hour > 17) {
+    "Good Evening!"
+  } else {
+    "Good Day!"
+  };
+  STDOUT.write_line(greeting);
+}
+```
+
+`./index.m`
+```m
+import module;
+
+export function main() -> Nil {
+  module::greet(16);
+  module::greet(16);
+}
 ```
 
 > Note: To import namespaces from the standard library, use `import Namepace from "std";`

@@ -7,12 +7,12 @@
 
 Functions are declared with their parameters in brackets.
 
-| [Pure Keyword] | Function Keyword | [Name] | Type Params | Params                     | [Return Type] | Arrow | Return Expression |
+| [Pure Keyword] | Function Keyword | Name | Type Params | Params                     | [Return Type] | Arrow | Return Expression |
 | -------------- | ---------------- | ------ | ----------- | -------------------------- | ------------- | ----- | ----------------- |
-| `pure`         | `fn`             | `add`  | (`<T>`)     | `(num1: Int8, num2: Int8)` | `: Int8`      | `->`  | `num1 + num2`     |
+| `pure`         | `function`             | `add`  | (`<T>`)     | `(num1: Int8, num2: Int8)` | `: Int8`      | `->`  | `num1 + num2`     |
 
 ```m
-pure fn add(num1: Int8, num2: Int8): Int16 -> num1 + num2;
+pure function add(num1: Int8, num2: Int8): Int16 -> num1 + num2;
 ```
 
 > **Note**: Unlike some languages, where the type of parameters can be inferred, type annotations are required on functional parameters.
@@ -38,7 +38,7 @@ Functions that return nothing can use `Nil` as their return type. They will then
 ```m
 import Stdout from "std:io";
 
-fn greet(hour: UInt8): Nil -> {
+function greet(hour: UInt8): Nil -> {
   if (hour > 17) {
     Stdout::write_line("Good Evening!");
     return;
@@ -46,7 +46,7 @@ fn greet(hour: UInt8): Nil -> {
   Stdout::write_line("Good Day!");
 }
 
-export fn main(): Nil -> {
+export function main(): Nil -> {
   greet(16);
   greet(19);
 }
@@ -64,8 +64,8 @@ Good Evening!
 There are times when a function just needs to compute a given argument and return the result, without producing any side-effects, such as editing global variables or writing to `stdout`. In these cases, the `pure` keyword is recommended.
 
 ```
-pure fn function(arg_1: [type], arg_2: [type]) -> [return type] {
+pure function function_name(arg_1: [type], arg_2: [type]) -> [return type] {
 }
 ```
 
-> **Note**: Pure keywords cannot have a return type of `Nil`.
+> **Note**: Pure functions cannot have a return type of `Nil`.

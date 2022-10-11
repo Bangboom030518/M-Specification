@@ -6,9 +6,9 @@ Variables in `M` behave similarly to those in rust, though there are some differ
 
 Variables are declared with a variable keyword, followed by their name, followed by an optional type annotation and a value.
 
-| keyword | [type annotation] | assignment
-| --- | --- | --- |
-| `let` | `: int16` | `= 12`
+| keyword | pattern       | assignment |
+| ------- | ------------- | ---------- |
+| `let`   | `my_variable` | `= 12u16`  |
 
 ### Const
 
@@ -52,5 +52,4 @@ void main() -> {
 
 ### Static
 
-`static` is evaluated once and stored until it's no longer needed.
-
+A `static` variable is lazily evaluated once and stored until it's no longer needed. They should be declared with `UPPER_SNAKE_CASE`, and can only be declared in the global scope. They cannot be exported.
