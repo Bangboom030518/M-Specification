@@ -21,7 +21,7 @@ type MyEnum enum {
 
 ### Accessing
 
-Items within enums are then accessed using the double colon syntax (`::`), like [namespaces](/namespace.md).
+Items within enums are then accessed using the double colon syntax (`::`).
 
 ```
 // ...

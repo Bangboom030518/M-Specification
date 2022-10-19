@@ -4,25 +4,40 @@ Modules allow code to be shared and reused across files. M provides a simple, st
 
 ## Exports
 
+Exporting a declaration allows it to be accessible when the module is imported. It is achieved through the `export` keyword
+
+| Export Keyword | Declaration                           |
+| -------------- | ------------------------------------- |
+| `export`       | `const MY_CONSTANT = "Hello World!"`  |
+| `export`       | `function my_function(): Nil -> {..}` |
+
+> **NOTE**: Declarations can only be exported at the top level, meaning runtime values using `let` or `var` cannot be exported.
+
 ## Imports
 
 ### Syntax
 
-| import keyword | module name |
-| -------------- | ----------- |
-| `import`       | `module`    |
+| import keyword | module name      |
+| -------------- | ---------------- |
+| `import`       | `module`         |
+| `import`       | `package/module` |
 
-### Examples
+### Package Imports
 
-```m
-import module;
-```
+It is sometimes necessary to import a module from an package in M. When doing this, simply prefix the module name with with the package name followed by a forward slash (`/`).
 
-This imports the file `./module.m`, relative to the dependant
+#### Syntax
+
+| import keyword | package name | forward slash | module name |
+| -------------- | ------------ | ------------- | ----------- |
+| `import`       | `my_package` | `/`           | `my_module` |
+
+> **NOTE**: To import from the standard library, use the `std` namespace, e.g `import std/io;`.
 
 ## Example
 
 `./module.m`
+
 ```m
 import std/io;
 
@@ -39,6 +54,7 @@ export function greet(hour: UInt8): Nil -> {
 ```
 
 `./index.m`
+
 ```m
 import module;
 
@@ -47,5 +63,3 @@ export function main() -> Nil {
   module::greet(16);
 }
 ```
-
-> Note: To import namespaces from the standard library, use `import Namepace from "std";`

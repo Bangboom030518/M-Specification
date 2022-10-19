@@ -14,6 +14,12 @@ For example, the following creates a struct called `MyStruct`, with the property
 
 ### Fields
 
+#### Syntax
+
+| name | colon | type | [initialisation] |
+| ---- | ----- | ---- | ---------------- |
+| `my_property
+
 ```
 struct MyStruct {
   property1: String;
@@ -27,9 +33,9 @@ For example, the following initialises `property1` to `"Hello World"` and `prope
 
 ```
 struct MyStruct {
-  property1: utf8[] = "Hello World";
-  property2: uint8 = 42;
+  property1: String = "Hello World";
+  property2: UInt8 = 42;
 }
 ```
 
-> **Note**: Unlike some languages, such as [Rust](https://www.rust-lang.org/), [C#](https://learn.microsoft.com/en-us/dotnet/csharp/), [C++](https://cplusplus.com/) and [Typescript](https://www.typescriptlang.org/), M disallows access modifers such as `public` or `private` as they can encourage bad design patterns that can introduce difficult bugs to a program.
+> **Note**: Unlike a lot of languages, such as [Rust](https://www.rust-lang.org/), [C#](https://learn.microsoft.com/en-us/dotnet/csharp/), [C++](https://cplusplus.com/) and [Typescript](https://www.typescriptlang.org/), M disallows access modifers such as `public` or `private` as they can encourage bad design patterns that can introduce difficult bugs to a program.
