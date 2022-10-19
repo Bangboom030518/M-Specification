@@ -12,6 +12,7 @@ Exporting a declaration allows it to be accessible when the module is imported. 
 | `export`       | `function my_function(): Nil -> {..}` |
 
 > **NOTE**: Declarations can only be exported at the top level, meaning runtime values using `let` or `var` cannot be exported.
+> **NOTE**: 
 
 ## Imports
 
@@ -63,3 +64,5 @@ export function main() -> Nil {
   module::greet(16);
 }
 ```
+
+
