@@ -12,28 +12,56 @@ Exporting a declaration allows it to be accessible when the module is imported. 
 | `export`       | `function my_function(): Nil -> {..}` |
 
 > **NOTE**: Declarations can only be exported at the top level, meaning runtime values using `let` or `var` cannot be exported.
-> **NOTE**: 
 
 ## Imports
 
+Import declarations allow other modules to be brought into the scope of the current file.
+
 ### Syntax
 
-| import keyword | module name      |
-| -------------- | ---------------- |
-| `import`       | `module`         |
-| `import`       | `package/module` |
+| import keyword | module path                   |
+| -------------- | ----------------------------- |
+| `import`       | `module`                      |
+| `import`       | `module::sub_module`          |
+| `import`       | `module::sub_1::sub_2::sub_3` |
 
-### Package Imports
+### Paths
 
-It is sometimes necessary to import a module from an package in M. When doing this, simply prefix the module name with with the package name followed by a forward slash (`/`).
+> **TODO**: Describe properly
 
-#### Syntax
+Modules in `M` are created with a file, ending in `.m`. The file name will be used when accessing the module.
 
-| import keyword | package name | forward slash | module name |
-| -------------- | ------------ | ------------- | ----------- |
-| `import`       | `my_package` | `/`           | `my_module` |
+> **NOTE**: Modules should be named in `lower_snake_case`, using only alphanumeric and the `_` characters
 
-> **NOTE**: To import from the standard library, use the `std` namespace, e.g `import std/io;`.
+If a module contains child modules, it should instead be a directory, with an `index.m` file to provide the entry point to that module and any child modules defined within the same directory.
+
+```
+filepath = ABSOLUTE PATH OF DEPENDANT
+path = IMPORT PATH AS A LIST OF NAMESPACES 
+result_path = PARENT DIERECTORY OF filepath
+
+IF path STARTS WITH "super" {
+    IF filepath IS "index.m" {
+        result_path += "/.."
+    } ELSE {
+        result_path += "/index.m"
+    }
+    // pop "super" from the path
+    POP path
+} ELSE IF path STARTS WITH "package" {
+    result_path = ABSOLUTE PATH TO PACKAGE ROOT
+}
+
+FOR namespace IN path {
+    IF namespace IS DIRECTORY {
+        result_path += `/${namespace}/index.m`
+    } ELSE {
+        result_path += `/index.m`
+    }
+}
+
+RETURN result_path
+```
 
 ## Example
 
@@ -64,5 +92,3 @@ export function main() -> Nil {
   module::greet(16);
 }
 ```
-
-
