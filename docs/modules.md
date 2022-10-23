@@ -40,23 +40,31 @@ filepath = ABSOLUTE PATH OF DEPENDANT
 path = IMPORT PATH AS A LIST OF NAMESPACES 
 result_path = PARENT DIERECTORY OF filepath
 
-IF path STARTS WITH "super" {
-    IF filepath IS "index.m" {
-        result_path += "/.."
-    } ELSE {
-        result_path += "/index.m"
-    }
-    // pop "super" from the path
-    POP path
-} ELSE IF path STARTS WITH "package" {
-    result_path = ABSOLUTE PATH TO PACKAGE ROOT
-}
-
 FOR namespace IN path {
-    IF namespace IS DIRECTORY {
-        result_path += `/${namespace}/index.m`
-    } ELSE {
-        result_path += `/index.m`
+    MATCH namespace {
+        "super" => {
+            IF filepath IS "index.m" {
+                result_path += "/.."
+            } ELSE {
+                result_path += "/index.m"
+            }
+        }
+
+        "package" => {
+            IF FIRST ITERATION {
+                result_path = ABSOLUTE PATH TO PACKAGE ROOT
+            } ELSE {
+                ERROR! "'package' keyword can only appear at the start of module path"
+            }
+        }
+
+        DIRECTORY => {
+            result_path += `/${namespace}/index.m`
+        }
+
+        ELSE => {
+            result_path += `/index.m`
+        }
     }
 }
 
