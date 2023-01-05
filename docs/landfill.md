@@ -148,3 +148,31 @@ struct T {
 ```
 int16 x = 12;
 ```
+
+```
+struct A {
+  let prop: String;
+  
+  impl MyTrait {
+    let prop2: String;
+  }
+  
+  impl MyTrait2 {
+    let prop2: String;
+  }
+}
+
+Trait1::method(self)
+self.method()
+
+let a = A {
+  prop: "_",
+  MyTrait {
+    prop2: "_",
+  }
+};
+
+<a as T>.prop2;
+
+a@T.prop2
+```
