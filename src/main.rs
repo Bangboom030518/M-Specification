@@ -15,7 +15,7 @@ const PORT: u16 = 80;
 
 lazy_static! {
     static ref TRAILING_SLASH_PATTERN: Regex = Regex::new(r"/?$").unwrap();
-    static ref ADDRESS: String = format!("127.0.0.1:{}", PORT);
+    static ref ADDRESS: String = format!("127.0.0.1:{PORT}");
 }
 
 // https://stackoverflow.com/questions/19650265/is-there-a-faster-shorter-way-to-initialize-variables-in-a-rust-struct
@@ -40,13 +40,13 @@ fn main() {
 fn handle_connection(mut stream: TcpStream) {
     let request = http::request::parse(&stream);
     let route = match &request.route[..] {
-        route if Path::new(&format!("./dist/{}", route)).is_dir() => {
+        route if Path::new(&format!("./dist/{route}")).is_dir() => {
             format!("{}/index", TRAILING_SLASH_PATTERN.replace("", route))
         }
         route => route.to_string(),
     };
     println!("{}", TRAILING_SLASH_PATTERN.replace("", &request.route[..]));
-    let path = format!("./dist{}.html", route);
+    let path = format!("./dist{route}.html");
     let response = http::response::create(match path {
         _ if Path::new(&path).is_file() => http::response::Response {
             body: fs::read_to_string(&path).unwrap(),

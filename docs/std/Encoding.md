@@ -5,7 +5,7 @@ The library used to encode and decode strings, allowing the support of encoding 
 ## Method
 
 ```
-export type Method enum {
+export enum Method {
     UTF_8,
     UTF_16,
     UTF_32,
@@ -81,7 +81,7 @@ All the supported encoding methods.
 ## Encode
 
 ```
-export pure uint8[] encode(string: String, method: Method);
+export encode(string: String, method: Method): List<UInt8>;
 ```
 
 Returns the text `string`, encoded as an array of bytes using the encoding method `method`.
@@ -89,7 +89,7 @@ Returns the text `string`, encoded as an array of bytes using the encoding metho
 ## Decode
 
 ```
-export String decode(bytes: uint8[], method: Method);
+export decode(bytes: uint8[], method: Method): String;
 ```
 
 Returns the array of bytes `bytes`, decoded as a string using the encoding method `method`.

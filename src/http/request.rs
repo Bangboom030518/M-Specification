@@ -37,7 +37,7 @@ impl TryFrom<&str> for Method {
             "CONNECT" => Ok(Self::Connect),
             "OPTIONS" => Ok(Self::Options),
             "TRACE" => Ok(Self::Trace),
-            method => Err(format!("Invalid HTTP Method '{}'", method)),
+            method => Err(format!("Invalid HTTP Method '{method}'")),
         }
     }
 }
@@ -62,14 +62,11 @@ pub fn parse(mut stream: &TcpStream) -> Request {
 
     lines.remove(0);
     let headers = utils::parse_key_value_pairs(&raw_request);
-    let body = match BODY_PATTERN.captures(&raw_request) {
-        None => "".to_string(),
-        captures => captures
-            .unwrap()
-            .get(0)
-            .map_or("", |m| m.as_str())
-            .to_string(),
-    };
+    let body = BODY_PATTERN
+        .captures(&raw_request)
+        .map_or_else(String::new, |captures| {
+            captures.get(0).map_or("", |m| m.as_str()).to_string()
+        });
 
     Request {
         headers,

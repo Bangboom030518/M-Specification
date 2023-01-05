@@ -23,6 +23,7 @@ Returns `text`, with all characters in upper case.
 ### Example
 
 #### Code
+
 ```m
 import String from "std";
 import Stdout from "std:io";
@@ -31,6 +32,7 @@ export fn main() {
     Stdout::write_line(String::to_upper_case("hello world"));
 }
 ```
+
 #### Expected Output
 
 ```console

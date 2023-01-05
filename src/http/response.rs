@@ -25,7 +25,7 @@ pub fn create(mut response: Response) -> Vec<u8> {
     let headers = response
         .headers
         .iter()
-        .map(|(name, value)| format!("{}: {}\r\n", name, value))
+        .map(|(name, value)| format!("{name}: {value}\r\n"))
         .collect::<String>();
 
     format!(

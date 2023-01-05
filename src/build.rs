@@ -41,13 +41,13 @@ pub fn build() {
                     metadata.get("heading").unwrap_or(&filename.to_string()),
                 )
                 .replace("%content%", &markdown)
-                .replace("%styles%", &format!("<style>{}</style>", styles))
+                .replace("%styles%", &format!("<style>{styles}</style>"))
                 .replace("%nav.tree%", &nav_tree),
         );
 
         match write_result {
             Ok(_) => (),
-            Err(error) => println!("{}", error),
+            Err(error) => println!("{error}"),
         };
     }
 }
@@ -71,10 +71,9 @@ fn get_filename(dest: &str) -> String {
 }
 
 fn parse_metadata(text: &str) -> HashMap<String, String> {
-    let metadata_string = match MARKDOWN_METADATA_PATTERN.find(text) {
-        None => "".to_string(),
-        matched => matched.unwrap().as_str().replace("---", ""),
-    };
+    let metadata_string = MARKDOWN_METADATA_PATTERN
+        .find(text)
+        .map_or_else(String::new, |matched| matched.as_str().replace("---", ""));
     parse_key_value_pairs(&metadata_string)
 }
 
@@ -97,7 +96,7 @@ fn build_styles() -> String {
     ) {
         Ok(value) => value,
         Err(err) => {
-            panic!("Sass: {}", err);
+            panic!("Sass: {err}");
         }
     }
 }

@@ -18,15 +18,6 @@ if (condition) {
 ```
 [See More](/control_flow/if)
 
-## For
-```
-for (item in iterable) {
-    // do something with item
-}
-```
-[See More](/control_flow/for)
-
-
 ## Match
 ```
 match (expression) {

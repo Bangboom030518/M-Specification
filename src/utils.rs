@@ -21,10 +21,9 @@ pub fn parse_key_value_pairs(text: &str) -> HashMap<String, String> {
 
 pub fn capitalise(text: &str) -> String {
     let mut chars = text.chars();
-    match chars.next() {
-        None => String::new(),
-        Some(char) => char.to_uppercase().collect::<String>() + chars.as_str(),
-    }
+    chars.next().map_or_else(String::new, |char| {
+        char.to_uppercase().collect::<String>() + chars.as_str()
+    })
 }
 
 pub fn read_dir(path: &str) -> Vec<String> {
