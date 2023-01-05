@@ -16,7 +16,9 @@
   ```
   
 - Do we scrap `::` and just have `.`?
-
+    - Yes
+- Do we scrap semicolons?
+    - Yes
 
 # If, while and match
 
@@ -40,16 +42,6 @@ while 2 + 2 == 4 do {
 
 ```
 
-Or not?
-
-```m
-let x = if condition {
-    expression
-} else {
-    expression
-}
-```
-
 What about `if let`?
 
 ```m
@@ -64,18 +56,4 @@ let x = if Some(x) = (nullable_expression) {
 } else {
 
 };
-
-while (2 + 2 != 4) 1
-
 ```
-
-struct MyStruct {
-    let x = 12;
-
-
-    function MyStruct() {
-        
-    }
-}
-
-
