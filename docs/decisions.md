@@ -4,20 +4,8 @@
 - Do we have a return label system, like [Kotlin](https://kotlinlang.org/docs/returns.html#return-to-labels)
   - Yes
 - Do we use `let` for properties?
-  - If so, lets add Trait-defined properties:
-    Initialised With
-  ```
-  let a = MyStruct {
-    prop: "_",
-    MyTrait {
-      prop1: "_",
-    }
-  }
-  ```
-- Do we scrap `::` and just have `.`?
-  - Yes
-- Do we scrap semicolons?
-  - Yes
+- NO SEMICOLONS
+- `.` instead of `::`
 
 
 
@@ -55,15 +43,27 @@ type Result<T, E: Error> = union {
   Error: E,
 }
 
+interface Iterator {
+  type Item
+  function next() Item?
+
+  function map<I, F: Function<Item, I>>(self, binding: F) Map<F, Self> do Map.new(binding, self)
+  Map<F, Self> map<I, Function<Item, I>>(self, binding: F) => Map.new(binding, self)
+}
+
+function next() -> None!Item {
+  
+}
+
 function ask_user_age() -> error {
   IO.WriteError,
   IO.ReadError,
   Bytes.ParseError<String>,
   String.ParseError<Int>
 }!Int {
-  // write_line(line: String) -> Result<Nil, IO.Error>
+  // write_line(line: String) -> IO.Error!Nil
   IO.Stdout.write_line("What is your age?")!
-  // read_line() -> Result<Bytes, IO.Error>
+  // read_line() -> IO.Error!Bytes
   return IO.Stdin.read_line()!.parse_string()!.parse()!
 }
 
