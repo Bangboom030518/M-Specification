@@ -1,0 +1,23 @@
+
+Animal = trait:
+    noise :: str
+    name :: str
+    species :: str
+
+    speak = fn {noise, species, name} :: Self:
+        return '${name} the ${species} says ${noise}!'
+
+
+AnimalKind = enum:
+    Dog :: struct:
+        impl animal:
+            species = 'dog'
+            noise = 'Woof'
+
+    Cat :: Cat
+
+main = func:
+    counter
+
+add = fn (a, b) :: (int, int):
+    return a + b
