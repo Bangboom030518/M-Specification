@@ -84,7 +84,7 @@ implement From<JsonValue> for String
 
 
 
-interface From<T>
+From = interface<T>
     function from (T value) Self
 
 Iterator = interface
