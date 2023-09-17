@@ -11,9 +11,13 @@ The library used for interacting with the file system.
 
 ## Error
 
-export enum Error {
+## File
+```
+struct File {...}
 
-}
+interface File {}
+
+```
 
 ## Read To Bytes
 

@@ -1,4 +1,4 @@
-# Unions
+# Union
 
 ```m
 union JsonValue {

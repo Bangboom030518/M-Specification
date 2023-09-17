@@ -21,3 +21,97 @@ main = func:
 
 add = fn (a, b) :: (int, int):
     return a + b
+
+Person = struct
+    Int32 a
+
+add = fn (i32 a, i32 b) i32 do
+    return a + b
+
+add = function (Integer32 number_1, Integer32 number_2) N
+
+Int32 add(Int32 number_1, Int32 number_2)
+
+export macro concatenate (Literal.String* strings) literal.String {
+    let strings = strings.concatenate()
+    return strings.into()
+} 
+
+export macro include_string (Literal.String file_path) literal.String {
+    import std.IO.*
+    let contents = fs.read_to_string(&String.from(file_path))
+    return contents.into()
+}
+
+HttpStatus = enum
+    OK
+    BAD_REQUEST
+    INTERNAL_SERVER_ERROR
+    // etc..
+
+    function code (self) UInt16 do
+        match self do
+            Self.OK                     do 200
+            Self.BAD_REQUEST            do 400
+            Self.INTERNAL_SERVER_ERROR  do 500
+
+JsonValue = union
+    String      string
+    Number      number
+    List<Self>  list
+
+    function as_string  (self) String?      do
+        let Self.string = self else
+            return nil
+        string
+
+    function as_list    (self) List<Self>?  do
+        match self do
+            Self.list   do list
+            _           do nil
+
+tests
+    function json_value () Nil do
+        let string = JsonValue.string "Makka Pakka"
+        string.as_string()!
+
+implement From<JsonValue> for String
+    function from (value) do
+        match value do
+            JsonValue.string do string
+            JsonValue.number do number
+            JsonValue.list   do list.iterator().map(JsonValue.to_string).collect()
+
+
+
+interface From<T>
+    function from (T value) Self
+
+Iterator = interface
+    type Item
+
+    function next (self) Item?
+
+    function map <F, T> (self, F closure) Map<Self, T>
+    where
+        F Function<(Self.Item), T>
+    do
+        Map.new(self, closure)
+        
+
+Person = struct
+    String name
+    UInt8 age
+
+    Person (self.name, self.age)
+
+    function speak (&Self { name, age }) String do
+        format("{name}, who is {age} years old, says hi")
+
+include_string = macro (Literal.String file_path) literal.String do
+    import std.IO.*
+    let contents = fs.read_to_string(&String.from(file_path))
+    contents.into()
+
+HELLO_WORLD = const "Hello World!"
+ALLOCATOR = static Allocator()

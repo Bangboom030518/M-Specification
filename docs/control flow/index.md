@@ -2,7 +2,7 @@ M supports all the usual control flow features, and also a `match` implementatio
 
 ## While
 ```
-while (condition) {
+while condition do {
     // do something
 }
 ```
