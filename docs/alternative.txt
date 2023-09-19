@@ -21,10 +21,9 @@ type JsonValue = union
         string
 
     function as_list (self) List<Self>? ->
-        match self do
-            Self.list   do list
-            _           do nil
-
+        match self ->
+            Self.list -> list
+            _ -> nil
 
 tests
     function json_value () Nil do
@@ -70,10 +69,9 @@ type Vec = struct
 
 interface Iterator =
 
-function add = (Int32 a, Int32 b) !Int32 -> {
+function add = (Int32 a, Int32 b) !Int32 ->
     asdasd
     asdasd
-}
 
 x.map((a) ->
     asdasd
@@ -88,3 +86,5 @@ implement Function for add
     const Arguments = ()
 
     const call = @StaticFunction(Self.Arguments)
+
+import 

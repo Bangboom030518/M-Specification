@@ -12,7 +12,7 @@ Variables are declared with a variable keyword, followed by their name, followed
 
 ### Const
 
-Variables declared with the `const` keyword are constants, meaning their value can *never* be changed, and must be a compile-time constant.
+Variables declared with the `const` keyword are constants, meaning their value can _never_ be changed, and must be a compile-time constant.
 
 Constants are not stored in memory, but instead have their value interpolated wherever they are used. They are useful for describing constants such as magic numbers with no cost to performance.
 
@@ -21,17 +21,17 @@ Constants are not stored in memory, but instead have their value interpolated wh
 ##### Code
 
 ```m
-import Stdout from "std:io";
+import std.io.*
 
-const MILES_TO_KILOMETERS = 1.60934;
+const MILES_TO_KILOMETERS = 1.60934
 
-float miles_to_km(miles: float) -> miles * MILES_TO_KILOMETERS;
+float miles_to_kilometers = (Float32 miles) Float32 -> miles * MILES_TO_KILOMETERS
 
-void main() -> {
-    Stdout::write_line(f"2 miles ≈ {miles_to_km(2)}km");
-    Stdout::write_line(f"3 miles ≈ {miles_to_km(3)}km");
-    Stdout::write_line(f"4 miles ≈ {miles_to_km(4)}km");
-}
+function main = () !Nil ->
+    St.write_line(format("2 miles ≈ {miles_to_kilometers(2)}km"))!
+    Stdout::write_line(f"3 miles ≈ {miles_to_kilometers(3)}km")!
+    Stdout::write_line(f"4 miles ≈ {miles_to_kilometers(4)}km")!
+    nil
 ```
 
 ##### Output
